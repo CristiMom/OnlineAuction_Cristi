@@ -1,6 +1,7 @@
 package com.sda.onlineAuction.service;
 
 import com.sda.onlineAuction.dto.ProductDto;
+import com.sda.onlineAuction.model.Category;
 import com.sda.onlineAuction.model.Product;
 import com.sda.onlineAuction.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class ProductService {
         product.setDescription(productDto.getDescription());
         product.setStartingPrice(Integer.valueOf(productDto.getStartBiddingPrice()));
         product.setEndDateTime(LocalDateTime.parse(productDto.getEndDateTime()));
+        product.setCategory(Category.valueOf(productDto.getCategory()));
         productRepository.save(product);
     }
 }

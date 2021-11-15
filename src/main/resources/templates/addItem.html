@@ -21,7 +21,8 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="product_name">Product name</label>
             <div class="col-md-4">
-                <input id="product_name" th:field="*{name}" name="name" placeholder="Product name" class="form-control input-md"
+                <input id="product_name" th:field="*{name}" name="name" placeholder="Product name"
+                       class="form-control input-md"
                        required="" type="text">
             </div>
         </div>
@@ -30,7 +31,8 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="product_description">Product description</label>
             <div class="col-md-4">
-                <input id="product_description" th:field="*{description}" name="description" placeholder="Product description" class="form-control input-md"
+                <input id="product_description" th:field="*{description}" name="description"
+                       placeholder="Product description" class="form-control input-md"
                        required="" type="text">
             </div>
         </div>
@@ -39,21 +41,20 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="product_starting_price">Product starting price</label>
             <div class="col-md-4">
-                <input id="product_starting_price" th:field="*{startBiddingPrice}" name="startBiddingPrice" placeholder="Product starting price" class="form-control input-md"
+                <input id="product_starting_price" th:field="*{startBiddingPrice}" name="startBiddingPrice"
+                       placeholder="Product starting price" class="form-control input-md"
                        required="" type="number">
             </div>
+            <label th:if="${#fields.hasErrors('startBiddingPrice')}" th:class="'error'" th:errors="*{startBiddingPrice}" class="col-lg-4 control-label" style="color:red;" ></label>
         </div>
 
         <!-- Product category area -->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="product_categorie">Product category</label>
+            <label class="col-md-4 control-label" for="product_category">Product category</label>
             <div class="col-md-4">
-                <select id="product_categorie"  name="product_categorie" class="form-control">
-                    <option value="" selected disabled hidden>Choose here</option>
-                    <option>Electronics</option>
-                    <option>Auto</option>
-                    <option>Books</option>
-                    <option>Games</option>
+                <select name="color" id="product_category" th:field="*{category}">
+                    <option th:each="colorOpt : ${T(com.sda.onlineAuction.model.Category).values()}"
+                            th:value="${colorOpt.name()}" th:text="${colorOpt.name()}"></option>
                 </select>
             </div>
         </div>
@@ -62,7 +63,8 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="auction_end_time">Auction End Date and Time</label>
             <div class="col-md-4">
-                <input id="auction_end_time" th:field="*{endDateTime}" name="auction_end_time" placeholder="Auction End Date and Time" class="form-control input-md"
+                <input id="auction_end_time" th:field="*{endDateTime}" name="auction_end_time"
+                       placeholder="Auction End Date and Time" class="form-control input-md"
                        required="" type="datetime-local">
             </div>
         </div>
