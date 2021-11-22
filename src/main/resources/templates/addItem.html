@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<form class="form-horizontal" th:object="${productDto}" th:action="@{/addItem}" method="post">
+<form class="form-horizontal" th:object="${productDto}" th:action="@{/addItem}" method="post" enctype="multipart/form-data">
     <fieldset>
 
         <!-- Form Name -->
@@ -66,6 +66,16 @@
                 <input id="auction_end_time" th:field="*{endDateTime}" name="auction_end_time"
                        placeholder="Auction End Date and Time" class="form-control input-md"
                        required="" type="datetime-local">
+            </div>
+        </div>
+
+        <!-- Product image area -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="product_image">Product image</label>
+            <div class="col-md-4">
+                <input id="product_image" name="productImage" accept="image/png, image/jpg, image/jpeg" placeholder="Product image"
+                       class="form-control input-md"
+                       required="" type="file">
             </div>
         </div>
 
