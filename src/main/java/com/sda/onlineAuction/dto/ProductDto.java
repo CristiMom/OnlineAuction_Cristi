@@ -16,4 +16,6 @@ public class ProductDto {
     private String category;
     private String endDateTime;
     private String image;
+    private String currentBidPrice;
+    private String loggedUserMaxBid;
 }

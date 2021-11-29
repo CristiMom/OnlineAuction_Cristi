@@ -2,7 +2,6 @@ package com.sda.onlineAuction.service;
 
 import com.sda.onlineAuction.model.User;
 import com.sda.onlineAuction.repository.UserRepository;
-import jdk.javadoc.internal.doclets.toolkit.taglets.SeeTaglet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

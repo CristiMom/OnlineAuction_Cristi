@@ -1,26 +1,66 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Add Item</title>
 
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/bootstrap.min.css}"/>
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/fontawesome.css}"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/tooplate-main.css}"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/owl.css}"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/custom.css}"/>
 
 </head>
 <body>
+<div class="featured container no-gutter">
 
-<form class="form-horizontal" th:object="${productDto}" th:action="@{/addItem}" method="post" enctype="multipart/form-data">
-    <fieldset>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-        <!-- Form Name -->
-        <legend>PRODUCTS</legend>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a sec:authorize="isAuthenticated()" class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a sec:authorize="hasRole('ROLE_BIDDER')" class="nav-link" href="/myProducts">My Products </a>
+                </li>
+                <li class="nav-item active">
+                    <a sec:authorize="hasRole('ROLE_SELLER')" class="nav-link" href="/addItem">Add Item</a>
+                </li>
+                <li class="nav-item">
+                    <a sec:authorize="isAnonymous()" class="nav-link" href="/registration">Registration</a>
+                </li>
+                <li class="nav-item">
+                    <a sec:authorize="isAnonymous()" class="nav-link " href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a sec:authorize="isAuthenticated()" class="nav-link " href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
+
+    <form class="form-horizontal addItemForm" th:object="${productDto}" th:action="@{/addItem}" method="post" enctype="multipart/form-data">
+
+
+
+<div class="addItemSection">
         <!-- Product name area -->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="product_name">Product name</label>
-            <div class="col-md-4">
+            <label class="control-label" for="product_name">Product name</label>
+            <div class="">
                 <input id="product_name" th:field="*{name}" name="name" placeholder="Product name"
                        class="form-control input-md"
                        required="" type="text">
@@ -29,8 +69,8 @@
 
         <!-- Product description area -->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="product_description">Product description</label>
-            <div class="col-md-4">
+            <label class="control-label" for="product_description">Product description</label>
+            <div class="">
                 <input id="product_description" th:field="*{description}" name="description"
                        placeholder="Product description" class="form-control input-md"
                        required="" type="text">
@@ -39,8 +79,8 @@
 
         <!-- Product starting price area -->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="product_starting_price">Product starting price</label>
-            <div class="col-md-4">
+            <label class="control-label" for="product_starting_price">Product starting price</label>
+            <div class="">
                 <input id="product_starting_price" th:field="*{startBiddingPrice}" name="startBiddingPrice"
                        placeholder="Product starting price" class="form-control input-md"
                        required="" type="number">
@@ -50,9 +90,9 @@
 
         <!-- Product category area -->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="product_category">Product category</label>
-            <div class="col-md-4">
-                <select name="color" id="product_category" th:field="*{category}">
+            <label class="control-label" for="product_category">Product category</label>
+            <div class="">
+                <select class="form-control" name="color" id="product_category" th:field="*{category}">
                     <option th:each="colorOpt : ${T(com.sda.onlineAuction.model.Category).values()}"
                             th:value="${colorOpt.name()}" th:text="${colorOpt.name()}"></option>
                 </select>
@@ -61,8 +101,8 @@
 
         <!-- Auction and date and time area -->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="auction_end_time">Auction End Date and Time</label>
-            <div class="col-md-4">
+            <label class="control-label" for="auction_end_time">Auction End Date and Time</label>
+            <div class="">
                 <input id="auction_end_time" th:field="*{endDateTime}" name="auction_end_time"
                        placeholder="Auction End Date and Time" class="form-control input-md"
                        required="" type="datetime-local">
@@ -71,8 +111,8 @@
 
         <!-- Product image area -->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="product_image">Product image</label>
-            <div class="col-md-4">
+            <label class="control-label" for="product_image">Product image</label>
+            <div class="">
                 <input id="product_image" name="productImage" accept="image/png, image/jpg, image/jpeg" placeholder="Product image"
                        class="form-control input-md"
                        required="" type="file">
@@ -82,15 +122,15 @@
 
         <!-- Button add product area -->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <label class="control-label" for="singlebutton"></label>
             <div class="col-md-4">
                 <button id="singlebutton" name="singlebutton" type="submit" class="btn btn-primary">Add Product</button>
             </div>
         </div>
+</div>
 
-    </fieldset>
 </form>
 
-
+</div>
 </body>
 </html>
